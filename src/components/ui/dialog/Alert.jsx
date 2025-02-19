@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import { hideAlert } from "../store/alertSlice";
 import { X } from "lucide-react";
 import { useEffect } from "react";
+import { hideAlert } from "../../../store/alertSlice";
 
 export default function Alert() {
   const dispatch = useDispatch();
-  const { message, type, visible } = useSelector((state) => state.alert);
+  const { message, text, type, visible } = useSelector((state) => state.alert);
 
   useEffect(() => {
     if (visible) {
@@ -24,8 +24,11 @@ export default function Alert() {
   };
 
   return (
-    <div className={`fixed top-4 right-4 p-4 border-l-4 rounded-md shadow-md flex items-center ${alertStyles[type]}`}>
-      <span className="flex-1">{message}</span>
+    <div className={`fixed top-4 right-4 p-4 border-1 w-96 rounded-md shadow-md flex items-center justify-between ${alertStyles[type]}`}>
+        <div className="flex flex-col">
+            <span className="font-semibold">{message}</span>
+            <span className="text-sm">{text}</span>
+        </div>
       <button onClick={() => dispatch(hideAlert())} className="ml-3 text-gray-600 hover:text-gray-800">
         <X size={18} />
       </button>

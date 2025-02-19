@@ -1,4 +1,62 @@
-const ConfirmDialog = ({ isOpen, onClose, data, onSave }) => {
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LoaderCircle } from "lucide-react";
+
+const userSchema = z.object({
+    name: z.string().min(3, "Name must be at least 3 characters"),
+    email: z.string().email("Invalid email format"),
+    phone: z.string().min(3, "Phone must be at least 10 digits"),
+    company: z.string().min(1, "Company cannot be empty"),
+  });
+  
+
+const AddModal = ({ isOpen, onClose, type, data, onSave}) => {
+    const [user, setUser] = useState({
+        name: '',
+        email: '',
+        phone: 0,
+        company: {
+          name: ''
+        }
+    })
+
+    const [loading, setLoading] = useState(false);
+
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        formState: { errors },
+    } = useForm({
+        resolver: zodResolver(userSchema),
+    });
+
+    useEffect(() => {
+        if(data) {
+            setUser(data);
+            if(user.company) {
+              setValue('name', user.name);
+              setValue('email', user.email);
+              setValue('phone', user.phone);
+              setValue('company', user.company.name);
+            }
+        }
+    }, [data, user])
+
+    const onSubmit = (data) => {
+      setLoading(true);
+      onSave(data);
+      setTimeout(() => {
+        handleClose();
+      }, 500);
+    };
+    const handleClose = () => {
+        setLoading(false);
+        onClose()
+    }  
     if (!isOpen) return null;
   
     return (
@@ -6,30 +64,49 @@ const ConfirmDialog = ({ isOpen, onClose, data, onSave }) => {
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 w-96">
           {/* Dialog Title */}
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-            {title}
+            {` ${type === 'add' ? 'Add' : 'Edit'} User`}
           </h2>
-  
-          {/* Dialog Message */}
-          <p className="text-gray-700 dark:text-gray-300 mb-6">{message}</p>
-  
+
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div>
+                <label className="block text-sm font-medium">Name</label>
+                <input {...register("name")} className="w-full text-sm px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:text-white" />
+                {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
+            </div>
+
+            <div>
+                <label className="block text-sm font-medium">Email</label>
+                <input {...register("email")} className="w-full text-sm px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:text-white" />
+                {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+            </div>
+
+            <div>
+                <label className="block text-sm font-medium">Phone</label>
+                <input {...register("phone")} className="w-full text-sm px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:text-white" />
+                {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
+            </div>
+
+            <div>
+                <label className="block text-sm font-medium">Company</label>
+                <input {...register("company")} className="w-full text-sm px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:text-white" />
+                {errors.company && <p className="text-red-500 text-sm">{errors.company.message}</p>}
+            </div>
+
+            <button type="submit" disabled={loading} className={`${loading ? 'flex gap-2 justify-center text-gray-300' : 'text-white'} w-full bg-gray-900 font-semibold p-2 rounded-lg disabled:bg-gray-700 disabled:cursor-not-allowed hover:bg-gray-700 duration-150 transition-all ease-in-out`}>
+                {loading && <LoaderCircle className={loading ? 'animate-spin' : ''}/>}
+                Submit
+            </button>
+        </form>
           {/* Action Buttons */}
-          <div className="flex justify-end space-x-4">
-            <button
-              onClick={onClose}
-              className="px-4 py-2 text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none"
+          <button
+              onClick={() => handleClose()}
+              className="w-full mt-2 px-4 py-2 text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none duration-150 transition-all ease-in-out"
             >
               Cancel
             </button>
-            <button
-              onClick={onConfirm}
-              className="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none"
-            >
-              Confirm
-            </button>
-          </div>
         </div>
       </div>
     );
   };
   
-  export default ConfirmDialog;
+  export default AddModal;
