@@ -1,10 +1,8 @@
 /* eslint-disable react/prop-types */
- 
 const PaginatedList = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   // Get current items
-  // const currentItems = data.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
   return (
     <div className="">
       {/* Pagination Controls */}

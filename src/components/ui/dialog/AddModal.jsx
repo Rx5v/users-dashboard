@@ -61,34 +61,34 @@ const AddModal = ({ isOpen, onClose, type, data, onSave}) => {
   
     return (
       <div className="fixed backdrop-blur-sm inset-0 bg-gray-600/50 flex items-center justify-center z-2">
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 w-96">
+        <div className="bg-white rounded-lg shadow-lg p-6 w-96">
           {/* Dialog Title */}
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">
             {` ${type === 'add' ? 'Add' : 'Edit'} User`}
           </h2>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
                 <label className="block text-sm font-medium">Name</label>
-                <input {...register("name")} className="w-full text-sm px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:text-white" />
+                <input {...register("name")} className="w-full text-sm px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-200" />
                 {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
             </div>
 
             <div>
                 <label className="block text-sm font-medium">Email</label>
-                <input {...register("email")} className="w-full text-sm px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:text-white" />
+                <input {...register("email")} className="w-full text-sm px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-200" />
                 {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
             </div>
 
             <div>
                 <label className="block text-sm font-medium">Phone</label>
-                <input {...register("phone")} className="w-full text-sm px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:text-white" />
+                <input {...register("phone")} className="w-full text-sm px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-200" />
                 {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
             </div>
 
             <div>
                 <label className="block text-sm font-medium">Company</label>
-                <input {...register("company")} className="w-full text-sm px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-200 dark:bg-gray-800 dark:border-gray-600 dark:text-white" />
+                <input {...register("company")} className="w-full text-sm px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-gray-200" />
                 {errors.company && <p className="text-red-500 text-sm">{errors.company.message}</p>}
             </div>
 
@@ -100,7 +100,7 @@ const AddModal = ({ isOpen, onClose, type, data, onSave}) => {
           {/* Action Buttons */}
           <button
               onClick={() => handleClose()}
-              className="w-full mt-2 px-4 py-2 text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none duration-150 transition-all ease-in-out"
+              className="w-full mt-2 px-4 py-2 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 focus:outline-none duration-150 transition-all ease-in-out"
             >
               Cancel
             </button>

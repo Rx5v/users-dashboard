@@ -4,7 +4,7 @@ import { Sidebar } from "../ui/sidebar";
 
 const MainLayout = () => {
   return (
-    <div className="flex h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
       <Sidebar>
           <SidebarMenu />

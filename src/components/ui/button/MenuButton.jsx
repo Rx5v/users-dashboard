@@ -1,5 +1,6 @@
+/* eslint-disable react/prop-types */
 import { EllipsisVertical, Trash2Icon, UserRoundPen } from "lucide-react";
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const MenuButton = ({onEdit, onDelete}) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,12 +51,12 @@ const MenuButton = ({onEdit, onDelete}) => {
         >
           <ul>
             <li>
-              <button onClick={() => handleEdit()} className="w-full px-4 py-2 text-zinc-500 hover:text-zinc-800 hover:bg-gray-100 font-medium rounded-lg hover:text-dark cursor-pointer flex items-center gap-2">
+              <button onClick={() => handleEdit()} className="w-full px-4 py-2 text-zinc-500 hover:text-zinc-800 hover:bg-gray-100 font-medium rounded-lg cursor-pointer flex items-center gap-2">
                 <UserRoundPen  size={14} strokeWidth={3}/> Edit User
               </button>
             </li>
             <li>
-              <button onClick={() => handleDelete()} className="w-full px-4 py-2 text-zinc-500 hover:text-zinc-800 hover:bg-gray-100 font-medium rounded-lg hover:text-dark cursor-pointer flex items-center gap-2">
+              <button onClick={() => handleDelete()} className="w-full px-4 py-2 text-zinc-500 hover:text-zinc-800 hover:bg-gray-100 font-medium rounded-lg cursor-pointer flex items-center gap-2">
                 <Trash2Icon size={14} strokeWidth={3}/> Delete User
               </button>
             </li>

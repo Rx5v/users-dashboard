@@ -46,11 +46,6 @@ const UserList = () => {
       setOpenConfirmDialog(!openConfirmDialog);
       setSelectedUser(data);
     }
-
-    const handleEdit = (data) => {
-      setOpenConfirmDialog(!openConfirmDialog);
-      setSelectedUser(data);
-    }
     
     const handleOpenDialog = () => {
         setOpenConfirmDialog(!openConfirmDialog);
@@ -61,7 +56,6 @@ const UserList = () => {
         setSelectedUser({});
         handleOpenDialog();
         dispatch(showAlert({ message: "Success!", text: "User Deleted!",  type: "success" }))
-        
     }
 
     const handleOpenAdd = (type, data=null) => {
@@ -69,6 +63,7 @@ const UserList = () => {
       setActionType(type);
       if(type === 'edit') setSelectedUser(data);
     }
+
     const handleCloseAdd = () => {
       setActionType();
       setSelectedUser({});
@@ -128,13 +123,19 @@ const UserList = () => {
             ))}
           </tbody>
         </table>
+
+        {/* pagination */}
         <PaginatedList
           totalItems={filteredUsers.length}
           itemsPerPage={itemsPerPage}
           currentPage={currentPage}
           onPageChange={setCurrentPage}/>
+
+        {/* confirm dialog */}
         <ConfirmDialog isOpen={openConfirmDialog} onClose={() => handleOpenDialog()} onConfirm={() => handleConfirmDelete()} title="Are you sure?" message="You will remove this data." />
-        { <AddModal isOpen={openModal} data={selectedUser} type={actionType} onClose={() => handleCloseAdd()} onSave={handleSaveData}/>}
+
+        {/* add / edit modal */}
+        <AddModal isOpen={openModal} data={selectedUser} type={actionType} onClose={() => handleCloseAdd()} onSave={handleSaveData}/>
       </div>
     );
   };
