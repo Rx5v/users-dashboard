@@ -69,7 +69,7 @@ const UserList = () => {
       setSelectedUser({});
       setOpenModal(false);
     }
-  
+    
     const handleSaveData = (data) => {
       try{
         setTimeout(() => {
@@ -82,9 +82,9 @@ const UserList = () => {
             dispatch(showAlert({ message: "Success!", text: "User saved!",  type: "success" }))
           }
         }, 500);
+        setSelectedUser({});
       } catch(error) {
         console.log(error);
-        
       }
     }
 
@@ -95,11 +95,12 @@ const UserList = () => {
           <h1 className="text-2xl font-semibold">User Management</h1>
           <p className="text-zinc-500">Manage all user here</p>
         </div>
-        <div className="flex gap-2 items-center justify-between">
+        <div className="flex gap-2 items-center justify-between max-w-full overflow-x-hidden">
           <SearchInput />
-          <button onClick={() => handleOpenAdd('add')} className="bg-gray-900 text-white text-sm py-2 px-3 rounded-lg flex items-center gap-2 hover:bg-gray-700"> <Plus size={16}/> New User</button>
+          <button onClick={() => handleOpenAdd('add')} className="md:w-32 w-36 bg-gray-900 text-white text-sm py-2 md:py-3  px-2 rounded-lg flex justify-center items-center gap-1 hover:bg-gray-700"> <Plus size={16}/> New User</button>
         </div>
-        <table className="table-auto w-full mt-4 border-collapse border border-gray-200 rounded-lg">
+        <div className="w-full md: mb-4 overflow-x-scroll mt-4">
+          <table className="table-auto overflow-x-scroll w-full border-collapse border border-gray-200 rounded-lg">
           <thead className="rounded-lg">
             <tr className="bg-gray-100 rounded-lg">
               <th className="p-3 text-sm text-zinc-500 font-semibold rounded-lg">ID</th>
@@ -123,6 +124,7 @@ const UserList = () => {
             ))}
           </tbody>
         </table>
+        </div>
 
         {/* pagination */}
         <PaginatedList

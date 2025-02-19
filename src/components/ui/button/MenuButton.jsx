@@ -47,7 +47,7 @@ const MenuButton = ({onEdit, onDelete}) => {
       {(
         <div
           ref={menuRef}
-          className={`absolute right-0 mt-2 px-1 py-2 w-48 bg-white border border-gray-300 rounded-xl shadow-lg transition-all ease-in-out duration-100 ${isOpen ? "transform translate-y-0 opacity-100 z-1" : "transform translate-y-5 opacity-50 -z-2"}`}
+          className={`absolute right-0 mt-2 px-1 py-2 w-48 bg-white border border-gray-300 rounded-xl shadow-lg transition-all ease-in-out duration-100 ${isOpen ? "transform translate-y-0 opacity-100 z-1" : "transform translate-y-5 opacity-50 -z-2 sr-only"}`}
         >
           <ul>
             <li>

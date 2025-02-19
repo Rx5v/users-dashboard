@@ -24,7 +24,7 @@ export default function Alert() {
   };
 
   return (
-    <div className={`fixed top-4 right-4 p-4 border-1 w-96 rounded-md shadow-md flex items-center justify-between ${alertStyles[type]}`}>
+    <div className={`fixed top-4 right-4 p-4 border-1 w-64 md:w-96 rounded-md shadow-md flex items-center justify-between ${alertStyles[type]}`}>
         <div className="flex flex-col">
             <span className="font-semibold">{message}</span>
             <span className="text-sm">{text}</span>

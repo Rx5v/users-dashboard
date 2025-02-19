@@ -29,13 +29,16 @@ const AddModal = ({ isOpen, onClose, type, data, onSave}) => {
         register,
         handleSubmit,
         setValue,
+        reset,
         formState: { errors },
     } = useForm({
         resolver: zodResolver(userSchema),
     });
 
     useEffect(() => {
-        if(data) {
+      console.log(user);
+      if(isOpen){
+        if(data && type === 'edit') {
             setUser(data);
             if(user.company) {
               setValue('name', user.name);
@@ -43,8 +46,19 @@ const AddModal = ({ isOpen, onClose, type, data, onSave}) => {
               setValue('phone', user.phone);
               setValue('company', user.company.name);
             }
+        }else{
+          setUser({
+            name: '',
+            email: '',
+            phone: 0,
+            company: {
+              name: ''
+            }
+          })
         }
+      }
     }, [data, user])
+
 
     const onSubmit = (data) => {
       setLoading(true);
@@ -54,6 +68,7 @@ const AddModal = ({ isOpen, onClose, type, data, onSave}) => {
       }, 500);
     };
     const handleClose = () => {
+        reset()
         setLoading(false);
         onClose()
     }  
